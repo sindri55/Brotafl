@@ -1,4 +1,5 @@
 module.exports = function(grunt) {
+  'use strict';
 
   grunt.initConfig({
     pkg: grunt.file.readJSON('package.json'),
@@ -24,7 +25,6 @@ module.exports = function(grunt) {
     jshint: {
       files: ['Gruntfile.js', 'src/**/*.js'],
       options: {
-        // options here to override JSHint defaults
         globals: {
           jQuery: true,
           console: true,
@@ -33,9 +33,43 @@ module.exports = function(grunt) {
         }
       }
     },
+    less: {
+      dev: {
+        options: {
+          compress: false,
+          yuicompress: false,
+          optimization: 0
+        },
+        files: [
+          {"dist/brotafl.css": "src/less/main.less"}
+        ],
+        tasks: ['autoprefixer']
+      },
+      production: {
+        options: {
+          paths: ["src/less"],
+          //compress: true,
+          cleancss: true
+        },
+        files: [
+          {"dist/brotafl.min.css": "src/less/main.less"}
+        ]
+      }
+    },
+    autoprefixer: {
+      dist: {
+        options: {
+          browsers: ['last 5 versions']
+        },
+        files: [
+          {'dist/brotafl.css': 'dist/brotafl.css'},
+          {'dist/brotafl.min.css': 'dist/brotafl.min.css'}
+        ]
+      }
+    },
     watch: {
       files: ['<%= jshint.files %>'],
-      tasks: ['jshint', 'qunit']
+      tasks: ['jshint', 'concat', 'uglify', 'less', 'autoprefixer', 'watch']
     }
   });
 
@@ -43,6 +77,8 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-contrib-jshint');
   grunt.loadNpmTasks('grunt-contrib-watch');
   grunt.loadNpmTasks('grunt-contrib-concat');
+  grunt.loadNpmTasks('grunt-contrib-less');
+  grunt.loadNpmTasks('grunt-autoprefixer');
 
-  grunt.registerTask('default', ['jshint', 'concat', 'uglify', 'watch']);
+  grunt.registerTask('default', ['jshint', 'concat', 'uglify', 'less', 'autoprefixer', 'watch']);
 };
