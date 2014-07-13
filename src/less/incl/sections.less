@@ -3,7 +3,8 @@
 // --------------------------------------------------
 
 #_setVar(){
-	@section-height: 400px;
+	@section-height-banner: 400px;
+	@section-height: 500px;
 	@section-width: 100%;
 
 	@logo-height: 100px;
@@ -24,10 +25,6 @@
 	    	background: @color-black;
 	    }
 
-	    .container {
-			height: @section-height + @navbar-height;
-	    }
-
 	    img {
 			position: absolute;
 		}
@@ -37,11 +34,12 @@
 
 			.container {
 				padding-top: @navbar-height;
+				height: @section-height-banner + @navbar-height;
 
 				.logo-img {
 					top: 0;
 					left: 0;
-					height: @section-height;
+					height: @section-height-banner;
 					z-index: 200;
 					transform-origin: left;
 				}
@@ -65,6 +63,11 @@
 
 		&.section {
 			overflow: hidden;
+
+			.container {
+				height: @section-height + @navbar-height;
+			}
+
 			img {
 				width: 100%;
 			}
