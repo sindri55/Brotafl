@@ -1,7 +1,5 @@
 $(document).ready(function(){
-	//initialise Stellar.js
-    //$(window).stellar();
-    var globalDiffY;
+    var globalDiffY = 125;
     var invert = false;
     var lastDiffY = 0;
     var fixed = false;
@@ -30,10 +28,6 @@ $(document).ready(function(){
 	  	}
 
 	  	if($el.hasClass('logo-img') && fixed !== true){
-	  		if(globalDiffY === undefined) {
-	  			globalDiffY = y - startY;
-	  			console.log("globalDiffY " + globalDiffY);
-	  		}
 			var realDiffY = diffY - globalDiffY;
 	  		var toScale = ((200 - realDiffY) / 250) + 0.4;
 	  		
@@ -77,8 +71,5 @@ $(document).ready(function(){
     	positionProperty: 'bannerTransform',
 
     	hideDistantElements: false,
-
-    	//hideElement: function($elem) { $elem.css('opacity', '1'); },
-  		//showElement: function($elem) { $elem.css('opacity', '1'); }
 	});
 });
