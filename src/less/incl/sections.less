@@ -1,0 +1,66 @@
+//
+// Sections
+// --------------------------------------------------
+
+#_setVar(){
+	@section-height: 400px;
+	@section-width: 100%;
+
+	@logo-height: 100px;
+	@logo-width: 100px;
+}
+
+#_media(){
+	section {
+		background-attachment: fixed;
+	    width:100%;
+	    position: relative;
+
+	    &:nth-child(even){
+	    	background: @color-white;
+	    }
+
+	    &:nth-child(odd){
+	    	background: @color-black;
+	    }
+
+	    .container {
+			height: @section-height + @navbar-height;
+	    }
+
+	    img {
+			position: absolute;
+		}
+
+		&.banner {
+			background: @color-black;
+
+			.container {
+				padding-top: @navbar-height;
+
+				.logo-img {
+					top: 0;
+					left: 0;
+					height: @section-height;
+					z-index: 200;
+					transform-origin: left;
+				}
+
+				.right-column {
+					float: right;
+					position: absolute;
+					right: 100px;
+					bottom: 100px;
+					border-top: 1px solid gold;
+					padding: 0 50px;
+					border-bottom: 1px solid gold;
+
+					h2 {
+						font-size: 30px;
+						color: @color-yellow;
+					}
+				}
+			}
+		}
+	}
+}

@@ -37,13 +37,13 @@ module.exports = function(grunt) {
       dev: {
         options: {
           compress: false,
-          yuicompress: false,
-          optimization: 0
+          yuicompress: true,
+          optimization: 0,
+          strictImports: true
         },
         files: [
-          {"dist/brotafl.css": "src/less/main.less"}
-        ],
-        tasks: ['autoprefixer']
+          {"dist/brotafl.css": "src/less/brotafl.less"}
+        ]
       },
       production: {
         options: {
@@ -52,7 +52,7 @@ module.exports = function(grunt) {
           cleancss: true
         },
         files: [
-          {"dist/brotafl.min.css": "src/less/main.less"}
+          {"dist/brotafl.min.css": "src/less/brotafl.less"}
         ]
       }
     },
@@ -68,7 +68,7 @@ module.exports = function(grunt) {
       }
     },
     watch: {
-      files: ['<%= jshint.files %>'],
+      files: ['<%= jshint.files %>', 'src/less/**/*.less'],
       tasks: ['jshint', 'concat', 'uglify', 'less', 'autoprefixer', 'watch']
     }
   });
